@@ -8,7 +8,7 @@
     "baseName": "briefGroupeJHipster",
     "packageName": "simplon.pros",
     "packageFolder": "simplon/pros",
-    "serverPort": "8080",
+    "serverPort": "8088",
     "authenticationType": "jwt",
     "cacheProvider": "ehcache",
     "enableHibernateCache": false,
