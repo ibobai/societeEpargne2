@@ -11,7 +11,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://briefgroupejhipster-mysql:3306/briefgroupejhipster?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
     ports:
-      - 8080:8080
+      - 8088:8088
   briefgroupejhipster-mysql:
     extends:
       file: mysql.yml
