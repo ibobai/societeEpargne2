@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "simplon.pros"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "monolith",
+    "baseName": "briefGroupeJHipster",
+    "packageName": "simplon.pros",
+    "packageFolder": "simplon/pros",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MTM5Y2FhMjQ1MTgwOTIzYzQ3NzIwZmI5MzBjZWVmY2VjNmRlNDkyZTQ0ZWJjYjliMWNlYjk5OGI3ZWQyNDcxY2JlNTAzODRkZjkxNmIwMTA0ZjYwNzQzN2YzOGM0ZDQyZDBmNzNhYTg0OWQ3NjRjMDQwOGIwY2E2MWYxMGNjMTc=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1648469899769,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
