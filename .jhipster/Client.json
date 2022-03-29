@@ -2,11 +2,6 @@
   "name": "Client",
   "fields": [
     {
-      "fieldName": "clientid",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "nom",
       "fieldType": "String",
       "fieldValidateRules": ["required", "maxlength"],
@@ -35,11 +30,6 @@
       "fieldType": "String",
       "fieldValidateRules": ["required", "maxlength"],
       "fieldValidateRulesMaxlength": "100"
-    },
-    {
-      "fieldName": "conseillerid",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [

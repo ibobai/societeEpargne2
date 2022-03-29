@@ -32,17 +32,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ComptecouResourceIT {
 
-    private static final Integer DEFAULT_COMPTECOUID = 1;
-    private static final Integer UPDATED_COMPTECOUID = 2;
-
     private static final Integer DEFAULT_FRAISTRANS = 1;
     private static final Integer UPDATED_FRAISTRANS = 2;
 
     private static final Double DEFAULT_SOLDEMIN = 1D;
     private static final Double UPDATED_SOLDEMIN = 2D;
-
-    private static final Integer DEFAULT_COMPTEID = 1;
-    private static final Integer UPDATED_COMPTEID = 2;
 
     @Autowired
     private ComptecouRepository comptecouRepository;
@@ -69,10 +63,8 @@ public class ComptecouResourceIT {
      */
     public static Comptecou createEntity(EntityManager em) {
         Comptecou comptecou = new Comptecou()
-            .comptecouid(DEFAULT_COMPTECOUID)
             .fraistrans(DEFAULT_FRAISTRANS)
-            .soldemin(DEFAULT_SOLDEMIN)
-            .compteid(DEFAULT_COMPTEID);
+            .soldemin(DEFAULT_SOLDEMIN);
         return comptecou;
     }
     /**
@@ -83,10 +75,8 @@ public class ComptecouResourceIT {
      */
     public static Comptecou createUpdatedEntity(EntityManager em) {
         Comptecou comptecou = new Comptecou()
-            .comptecouid(UPDATED_COMPTECOUID)
             .fraistrans(UPDATED_FRAISTRANS)
-            .soldemin(UPDATED_SOLDEMIN)
-            .compteid(UPDATED_COMPTEID);
+            .soldemin(UPDATED_SOLDEMIN);
         return comptecou;
     }
 
@@ -110,10 +100,8 @@ public class ComptecouResourceIT {
         List<Comptecou> comptecouList = comptecouRepository.findAll();
         assertThat(comptecouList).hasSize(databaseSizeBeforeCreate + 1);
         Comptecou testComptecou = comptecouList.get(comptecouList.size() - 1);
-        assertThat(testComptecou.getComptecouid()).isEqualTo(DEFAULT_COMPTECOUID);
         assertThat(testComptecou.getFraistrans()).isEqualTo(DEFAULT_FRAISTRANS);
         assertThat(testComptecou.getSoldemin()).isEqualTo(DEFAULT_SOLDEMIN);
-        assertThat(testComptecou.getCompteid()).isEqualTo(DEFAULT_COMPTEID);
     }
 
     @Test
@@ -136,26 +124,6 @@ public class ComptecouResourceIT {
         assertThat(comptecouList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkComptecouidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = comptecouRepository.findAll().size();
-        // set the field null
-        comptecou.setComptecouid(null);
-
-        // Create the Comptecou, which fails.
-        ComptecouDTO comptecouDTO = comptecouMapper.toDto(comptecou);
-
-
-        restComptecouMockMvc.perform(post("/api/comptecous")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(comptecouDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Comptecou> comptecouList = comptecouRepository.findAll();
-        assertThat(comptecouList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -199,26 +167,6 @@ public class ComptecouResourceIT {
 
     @Test
     @Transactional
-    public void checkCompteidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = comptecouRepository.findAll().size();
-        // set the field null
-        comptecou.setCompteid(null);
-
-        // Create the Comptecou, which fails.
-        ComptecouDTO comptecouDTO = comptecouMapper.toDto(comptecou);
-
-
-        restComptecouMockMvc.perform(post("/api/comptecous")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(comptecouDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Comptecou> comptecouList = comptecouRepository.findAll();
-        assertThat(comptecouList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllComptecous() throws Exception {
         // Initialize the database
         comptecouRepository.saveAndFlush(comptecou);
@@ -228,10 +176,8 @@ public class ComptecouResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(comptecou.getId().intValue())))
-            .andExpect(jsonPath("$.[*].comptecouid").value(hasItem(DEFAULT_COMPTECOUID)))
             .andExpect(jsonPath("$.[*].fraistrans").value(hasItem(DEFAULT_FRAISTRANS)))
-            .andExpect(jsonPath("$.[*].soldemin").value(hasItem(DEFAULT_SOLDEMIN.doubleValue())))
-            .andExpect(jsonPath("$.[*].compteid").value(hasItem(DEFAULT_COMPTEID)));
+            .andExpect(jsonPath("$.[*].soldemin").value(hasItem(DEFAULT_SOLDEMIN.doubleValue())));
     }
     
     @Test
@@ -245,10 +191,8 @@ public class ComptecouResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(comptecou.getId().intValue()))
-            .andExpect(jsonPath("$.comptecouid").value(DEFAULT_COMPTECOUID))
             .andExpect(jsonPath("$.fraistrans").value(DEFAULT_FRAISTRANS))
-            .andExpect(jsonPath("$.soldemin").value(DEFAULT_SOLDEMIN.doubleValue()))
-            .andExpect(jsonPath("$.compteid").value(DEFAULT_COMPTEID));
+            .andExpect(jsonPath("$.soldemin").value(DEFAULT_SOLDEMIN.doubleValue()));
     }
     @Test
     @Transactional
@@ -271,10 +215,8 @@ public class ComptecouResourceIT {
         // Disconnect from session so that the updates on updatedComptecou are not directly saved in db
         em.detach(updatedComptecou);
         updatedComptecou
-            .comptecouid(UPDATED_COMPTECOUID)
             .fraistrans(UPDATED_FRAISTRANS)
-            .soldemin(UPDATED_SOLDEMIN)
-            .compteid(UPDATED_COMPTEID);
+            .soldemin(UPDATED_SOLDEMIN);
         ComptecouDTO comptecouDTO = comptecouMapper.toDto(updatedComptecou);
 
         restComptecouMockMvc.perform(put("/api/comptecous")
@@ -286,10 +228,8 @@ public class ComptecouResourceIT {
         List<Comptecou> comptecouList = comptecouRepository.findAll();
         assertThat(comptecouList).hasSize(databaseSizeBeforeUpdate);
         Comptecou testComptecou = comptecouList.get(comptecouList.size() - 1);
-        assertThat(testComptecou.getComptecouid()).isEqualTo(UPDATED_COMPTECOUID);
         assertThat(testComptecou.getFraistrans()).isEqualTo(UPDATED_FRAISTRANS);
         assertThat(testComptecou.getSoldemin()).isEqualTo(UPDATED_SOLDEMIN);
-        assertThat(testComptecou.getCompteid()).isEqualTo(UPDATED_COMPTEID);
     }
 
     @Test

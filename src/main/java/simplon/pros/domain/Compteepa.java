@@ -21,20 +21,12 @@ public class Compteepa implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "compteepaid", nullable = false)
-    private Integer compteepaid;
-
-    @NotNull
     @Column(name = "tauxinteret", nullable = false)
     private Integer tauxinteret;
 
     @NotNull
     @Column(name = "plafond", nullable = false)
     private Integer plafond;
-
-    @NotNull
-    @Column(name = "compteid", nullable = false)
-    private Integer compteid;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "compteepas", allowSetters = true)
@@ -47,19 +39,6 @@ public class Compteepa implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getCompteepaid() {
-        return compteepaid;
-    }
-
-    public Compteepa compteepaid(Integer compteepaid) {
-        this.compteepaid = compteepaid;
-        return this;
-    }
-
-    public void setCompteepaid(Integer compteepaid) {
-        this.compteepaid = compteepaid;
     }
 
     public Integer getTauxinteret() {
@@ -86,19 +65,6 @@ public class Compteepa implements Serializable {
 
     public void setPlafond(Integer plafond) {
         this.plafond = plafond;
-    }
-
-    public Integer getCompteid() {
-        return compteid;
-    }
-
-    public Compteepa compteid(Integer compteid) {
-        this.compteid = compteid;
-        return this;
-    }
-
-    public void setCompteid(Integer compteid) {
-        this.compteid = compteid;
     }
 
     public Compte getCompte() {
@@ -136,10 +102,8 @@ public class Compteepa implements Serializable {
     public String toString() {
         return "Compteepa{" +
             "id=" + getId() +
-            ", compteepaid=" + getCompteepaid() +
             ", tauxinteret=" + getTauxinteret() +
             ", plafond=" + getPlafond() +
-            ", compteid=" + getCompteid() +
             "}";
     }
 }

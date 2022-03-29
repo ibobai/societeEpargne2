@@ -23,12 +23,10 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="transfertid"><span>Transfertid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="date"><span>Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="montant"><span>Montant</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="typeoperation"><span>Typeoperation</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="numcompte"><span>Numcompte</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="conseillerid"><span>Conseillerid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="compteId"><span>Compte</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -36,12 +34,10 @@
             <tbody>
                 <tr *ngFor="let transfert of transferts ;trackBy: trackId">
                     <td><a [routerLink]="['/transfert', transfert.id, 'view']">{{ transfert.id }}</a></td>
-                    <td>{{ transfert.transfertid }}</td>
                     <td>{{ transfert.date | date:'mediumDate' }}</td>
                     <td>{{ transfert.montant }}</td>
                     <td>{{ transfert.typeoperation }}</td>
                     <td>{{ transfert.numcompte }}</td>
-                    <td>{{ transfert.conseillerid }}</td>
                     <td>
                         <div *ngIf="transfert.compteId">
                             <a [routerLink]="['/compte', transfert.compteId , 'view']" >{{ transfert.compteId }}</a>

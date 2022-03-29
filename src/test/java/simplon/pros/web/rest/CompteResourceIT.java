@@ -32,17 +32,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class CompteResourceIT {
 
-    private static final Integer DEFAULT_COMPTEID = 1;
-    private static final Integer UPDATED_COMPTEID = 2;
-
     private static final Integer DEFAULT_NUMCOM = 1;
     private static final Integer UPDATED_NUMCOM = 2;
 
     private static final Double DEFAULT_SOLDE = 1D;
     private static final Double UPDATED_SOLDE = 2D;
-
-    private static final Integer DEFAULT_CLIENTID = 1;
-    private static final Integer UPDATED_CLIENTID = 2;
 
     @Autowired
     private CompteRepository compteRepository;
@@ -69,10 +63,8 @@ public class CompteResourceIT {
      */
     public static Compte createEntity(EntityManager em) {
         Compte compte = new Compte()
-            .compteid(DEFAULT_COMPTEID)
             .numcom(DEFAULT_NUMCOM)
-            .solde(DEFAULT_SOLDE)
-            .clientid(DEFAULT_CLIENTID);
+            .solde(DEFAULT_SOLDE);
         return compte;
     }
     /**
@@ -83,10 +75,8 @@ public class CompteResourceIT {
      */
     public static Compte createUpdatedEntity(EntityManager em) {
         Compte compte = new Compte()
-            .compteid(UPDATED_COMPTEID)
             .numcom(UPDATED_NUMCOM)
-            .solde(UPDATED_SOLDE)
-            .clientid(UPDATED_CLIENTID);
+            .solde(UPDATED_SOLDE);
         return compte;
     }
 
@@ -110,10 +100,8 @@ public class CompteResourceIT {
         List<Compte> compteList = compteRepository.findAll();
         assertThat(compteList).hasSize(databaseSizeBeforeCreate + 1);
         Compte testCompte = compteList.get(compteList.size() - 1);
-        assertThat(testCompte.getCompteid()).isEqualTo(DEFAULT_COMPTEID);
         assertThat(testCompte.getNumcom()).isEqualTo(DEFAULT_NUMCOM);
         assertThat(testCompte.getSolde()).isEqualTo(DEFAULT_SOLDE);
-        assertThat(testCompte.getClientid()).isEqualTo(DEFAULT_CLIENTID);
     }
 
     @Test
@@ -136,26 +124,6 @@ public class CompteResourceIT {
         assertThat(compteList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkCompteidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = compteRepository.findAll().size();
-        // set the field null
-        compte.setCompteid(null);
-
-        // Create the Compte, which fails.
-        CompteDTO compteDTO = compteMapper.toDto(compte);
-
-
-        restCompteMockMvc.perform(post("/api/comptes")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(compteDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Compte> compteList = compteRepository.findAll();
-        assertThat(compteList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -199,26 +167,6 @@ public class CompteResourceIT {
 
     @Test
     @Transactional
-    public void checkClientidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = compteRepository.findAll().size();
-        // set the field null
-        compte.setClientid(null);
-
-        // Create the Compte, which fails.
-        CompteDTO compteDTO = compteMapper.toDto(compte);
-
-
-        restCompteMockMvc.perform(post("/api/comptes")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(compteDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Compte> compteList = compteRepository.findAll();
-        assertThat(compteList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllComptes() throws Exception {
         // Initialize the database
         compteRepository.saveAndFlush(compte);
@@ -228,10 +176,8 @@ public class CompteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(compte.getId().intValue())))
-            .andExpect(jsonPath("$.[*].compteid").value(hasItem(DEFAULT_COMPTEID)))
             .andExpect(jsonPath("$.[*].numcom").value(hasItem(DEFAULT_NUMCOM)))
-            .andExpect(jsonPath("$.[*].solde").value(hasItem(DEFAULT_SOLDE.doubleValue())))
-            .andExpect(jsonPath("$.[*].clientid").value(hasItem(DEFAULT_CLIENTID)));
+            .andExpect(jsonPath("$.[*].solde").value(hasItem(DEFAULT_SOLDE.doubleValue())));
     }
     
     @Test
@@ -245,10 +191,8 @@ public class CompteResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(compte.getId().intValue()))
-            .andExpect(jsonPath("$.compteid").value(DEFAULT_COMPTEID))
             .andExpect(jsonPath("$.numcom").value(DEFAULT_NUMCOM))
-            .andExpect(jsonPath("$.solde").value(DEFAULT_SOLDE.doubleValue()))
-            .andExpect(jsonPath("$.clientid").value(DEFAULT_CLIENTID));
+            .andExpect(jsonPath("$.solde").value(DEFAULT_SOLDE.doubleValue()));
     }
     @Test
     @Transactional
@@ -271,10 +215,8 @@ public class CompteResourceIT {
         // Disconnect from session so that the updates on updatedCompte are not directly saved in db
         em.detach(updatedCompte);
         updatedCompte
-            .compteid(UPDATED_COMPTEID)
             .numcom(UPDATED_NUMCOM)
-            .solde(UPDATED_SOLDE)
-            .clientid(UPDATED_CLIENTID);
+            .solde(UPDATED_SOLDE);
         CompteDTO compteDTO = compteMapper.toDto(updatedCompte);
 
         restCompteMockMvc.perform(put("/api/comptes")
@@ -286,10 +228,8 @@ public class CompteResourceIT {
         List<Compte> compteList = compteRepository.findAll();
         assertThat(compteList).hasSize(databaseSizeBeforeUpdate);
         Compte testCompte = compteList.get(compteList.size() - 1);
-        assertThat(testCompte.getCompteid()).isEqualTo(UPDATED_COMPTEID);
         assertThat(testCompte.getNumcom()).isEqualTo(UPDATED_NUMCOM);
         assertThat(testCompte.getSolde()).isEqualTo(UPDATED_SOLDE);
-        assertThat(testCompte.getClientid()).isEqualTo(UPDATED_CLIENTID);
     }
 
     @Test

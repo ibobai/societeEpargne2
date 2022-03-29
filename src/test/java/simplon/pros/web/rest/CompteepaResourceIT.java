@@ -32,17 +32,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class CompteepaResourceIT {
 
-    private static final Integer DEFAULT_COMPTEEPAID = 1;
-    private static final Integer UPDATED_COMPTEEPAID = 2;
-
     private static final Integer DEFAULT_TAUXINTERET = 1;
     private static final Integer UPDATED_TAUXINTERET = 2;
 
     private static final Integer DEFAULT_PLAFOND = 1;
     private static final Integer UPDATED_PLAFOND = 2;
-
-    private static final Integer DEFAULT_COMPTEID = 1;
-    private static final Integer UPDATED_COMPTEID = 2;
 
     @Autowired
     private CompteepaRepository compteepaRepository;
@@ -69,10 +63,8 @@ public class CompteepaResourceIT {
      */
     public static Compteepa createEntity(EntityManager em) {
         Compteepa compteepa = new Compteepa()
-            .compteepaid(DEFAULT_COMPTEEPAID)
             .tauxinteret(DEFAULT_TAUXINTERET)
-            .plafond(DEFAULT_PLAFOND)
-            .compteid(DEFAULT_COMPTEID);
+            .plafond(DEFAULT_PLAFOND);
         return compteepa;
     }
     /**
@@ -83,10 +75,8 @@ public class CompteepaResourceIT {
      */
     public static Compteepa createUpdatedEntity(EntityManager em) {
         Compteepa compteepa = new Compteepa()
-            .compteepaid(UPDATED_COMPTEEPAID)
             .tauxinteret(UPDATED_TAUXINTERET)
-            .plafond(UPDATED_PLAFOND)
-            .compteid(UPDATED_COMPTEID);
+            .plafond(UPDATED_PLAFOND);
         return compteepa;
     }
 
@@ -110,10 +100,8 @@ public class CompteepaResourceIT {
         List<Compteepa> compteepaList = compteepaRepository.findAll();
         assertThat(compteepaList).hasSize(databaseSizeBeforeCreate + 1);
         Compteepa testCompteepa = compteepaList.get(compteepaList.size() - 1);
-        assertThat(testCompteepa.getCompteepaid()).isEqualTo(DEFAULT_COMPTEEPAID);
         assertThat(testCompteepa.getTauxinteret()).isEqualTo(DEFAULT_TAUXINTERET);
         assertThat(testCompteepa.getPlafond()).isEqualTo(DEFAULT_PLAFOND);
-        assertThat(testCompteepa.getCompteid()).isEqualTo(DEFAULT_COMPTEID);
     }
 
     @Test
@@ -136,26 +124,6 @@ public class CompteepaResourceIT {
         assertThat(compteepaList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkCompteepaidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = compteepaRepository.findAll().size();
-        // set the field null
-        compteepa.setCompteepaid(null);
-
-        // Create the Compteepa, which fails.
-        CompteepaDTO compteepaDTO = compteepaMapper.toDto(compteepa);
-
-
-        restCompteepaMockMvc.perform(post("/api/compteepas")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(compteepaDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Compteepa> compteepaList = compteepaRepository.findAll();
-        assertThat(compteepaList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -199,26 +167,6 @@ public class CompteepaResourceIT {
 
     @Test
     @Transactional
-    public void checkCompteidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = compteepaRepository.findAll().size();
-        // set the field null
-        compteepa.setCompteid(null);
-
-        // Create the Compteepa, which fails.
-        CompteepaDTO compteepaDTO = compteepaMapper.toDto(compteepa);
-
-
-        restCompteepaMockMvc.perform(post("/api/compteepas")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(compteepaDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Compteepa> compteepaList = compteepaRepository.findAll();
-        assertThat(compteepaList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllCompteepas() throws Exception {
         // Initialize the database
         compteepaRepository.saveAndFlush(compteepa);
@@ -228,10 +176,8 @@ public class CompteepaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(compteepa.getId().intValue())))
-            .andExpect(jsonPath("$.[*].compteepaid").value(hasItem(DEFAULT_COMPTEEPAID)))
             .andExpect(jsonPath("$.[*].tauxinteret").value(hasItem(DEFAULT_TAUXINTERET)))
-            .andExpect(jsonPath("$.[*].plafond").value(hasItem(DEFAULT_PLAFOND)))
-            .andExpect(jsonPath("$.[*].compteid").value(hasItem(DEFAULT_COMPTEID)));
+            .andExpect(jsonPath("$.[*].plafond").value(hasItem(DEFAULT_PLAFOND)));
     }
     
     @Test
@@ -245,10 +191,8 @@ public class CompteepaResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(compteepa.getId().intValue()))
-            .andExpect(jsonPath("$.compteepaid").value(DEFAULT_COMPTEEPAID))
             .andExpect(jsonPath("$.tauxinteret").value(DEFAULT_TAUXINTERET))
-            .andExpect(jsonPath("$.plafond").value(DEFAULT_PLAFOND))
-            .andExpect(jsonPath("$.compteid").value(DEFAULT_COMPTEID));
+            .andExpect(jsonPath("$.plafond").value(DEFAULT_PLAFOND));
     }
     @Test
     @Transactional
@@ -271,10 +215,8 @@ public class CompteepaResourceIT {
         // Disconnect from session so that the updates on updatedCompteepa are not directly saved in db
         em.detach(updatedCompteepa);
         updatedCompteepa
-            .compteepaid(UPDATED_COMPTEEPAID)
             .tauxinteret(UPDATED_TAUXINTERET)
-            .plafond(UPDATED_PLAFOND)
-            .compteid(UPDATED_COMPTEID);
+            .plafond(UPDATED_PLAFOND);
         CompteepaDTO compteepaDTO = compteepaMapper.toDto(updatedCompteepa);
 
         restCompteepaMockMvc.perform(put("/api/compteepas")
@@ -286,10 +228,8 @@ public class CompteepaResourceIT {
         List<Compteepa> compteepaList = compteepaRepository.findAll();
         assertThat(compteepaList).hasSize(databaseSizeBeforeUpdate);
         Compteepa testCompteepa = compteepaList.get(compteepaList.size() - 1);
-        assertThat(testCompteepa.getCompteepaid()).isEqualTo(UPDATED_COMPTEEPAID);
         assertThat(testCompteepa.getTauxinteret()).isEqualTo(UPDATED_TAUXINTERET);
         assertThat(testCompteepa.getPlafond()).isEqualTo(UPDATED_PLAFOND);
-        assertThat(testCompteepa.getCompteid()).isEqualTo(UPDATED_COMPTEID);
     }
 
     @Test

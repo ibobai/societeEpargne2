@@ -11,16 +11,10 @@ public class ComptecouDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Integer comptecouid;
-
-    @NotNull
     private Integer fraistrans;
 
     @NotNull
     private Double soldemin;
-
-    @NotNull
-    private Integer compteid;
 
 
     private Long compteId;
@@ -31,14 +25,6 @@ public class ComptecouDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getComptecouid() {
-        return comptecouid;
-    }
-
-    public void setComptecouid(Integer comptecouid) {
-        this.comptecouid = comptecouid;
     }
 
     public Integer getFraistrans() {
@@ -55,14 +41,6 @@ public class ComptecouDTO implements Serializable {
 
     public void setSoldemin(Double soldemin) {
         this.soldemin = soldemin;
-    }
-
-    public Integer getCompteid() {
-        return compteid;
-    }
-
-    public void setCompteid(Integer compteid) {
-        this.compteid = compteid;
     }
 
     public Long getCompteId() {
@@ -95,10 +73,8 @@ public class ComptecouDTO implements Serializable {
     public String toString() {
         return "ComptecouDTO{" +
             "id=" + getId() +
-            ", comptecouid=" + getComptecouid() +
             ", fraistrans=" + getFraistrans() +
             ", soldemin=" + getSoldemin() +
-            ", compteid=" + getCompteid() +
             ", compteId=" + getCompteId() +
             "}";
     }

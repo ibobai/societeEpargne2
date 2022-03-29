@@ -11,9 +11,6 @@ public class ConseillerDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Integer conseillerid;
-
-    @NotNull
     @Size(max = 50)
     private String nom;
 
@@ -46,14 +43,6 @@ public class ConseillerDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getConseillerid() {
-        return conseillerid;
-    }
-
-    public void setConseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
     }
 
     public String getNom() {
@@ -134,7 +123,6 @@ public class ConseillerDTO implements Serializable {
     public String toString() {
         return "ConseillerDTO{" +
             "id=" + getId() +
-            ", conseillerid=" + getConseillerid() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", tel='" + getTel() + "'" +

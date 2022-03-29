@@ -1,6 +1,5 @@
 export interface IConseiller {
   id?: number;
-  conseillerid?: number;
   nom?: string;
   prenom?: string;
   tel?: string;
@@ -13,7 +12,6 @@ export interface IConseiller {
 export class Conseiller implements IConseiller {
   constructor(
     public id?: number,
-    public conseillerid?: number,
     public nom?: string,
     public prenom?: string,
     public tel?: string,

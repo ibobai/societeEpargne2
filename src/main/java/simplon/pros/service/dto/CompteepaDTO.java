@@ -11,16 +11,10 @@ public class CompteepaDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Integer compteepaid;
-
-    @NotNull
     private Integer tauxinteret;
 
     @NotNull
     private Integer plafond;
-
-    @NotNull
-    private Integer compteid;
 
 
     private Long compteId;
@@ -31,14 +25,6 @@ public class CompteepaDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getCompteepaid() {
-        return compteepaid;
-    }
-
-    public void setCompteepaid(Integer compteepaid) {
-        this.compteepaid = compteepaid;
     }
 
     public Integer getTauxinteret() {
@@ -55,14 +41,6 @@ public class CompteepaDTO implements Serializable {
 
     public void setPlafond(Integer plafond) {
         this.plafond = plafond;
-    }
-
-    public Integer getCompteid() {
-        return compteid;
-    }
-
-    public void setCompteid(Integer compteid) {
-        this.compteid = compteid;
     }
 
     public Long getCompteId() {
@@ -95,10 +73,8 @@ public class CompteepaDTO implements Serializable {
     public String toString() {
         return "CompteepaDTO{" +
             "id=" + getId() +
-            ", compteepaid=" + getCompteepaid() +
             ", tauxinteret=" + getTauxinteret() +
             ", plafond=" + getPlafond() +
-            ", compteid=" + getCompteid() +
             ", compteId=" + getCompteId() +
             "}";
     }

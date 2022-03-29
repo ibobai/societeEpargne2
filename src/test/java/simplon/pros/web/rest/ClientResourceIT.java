@@ -32,9 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ClientResourceIT {
 
-    private static final Integer DEFAULT_CLIENTID = 1;
-    private static final Integer UPDATED_CLIENTID = 2;
-
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
 
@@ -49,9 +46,6 @@ public class ClientResourceIT {
 
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
-
-    private static final Integer DEFAULT_CONSEILLERID = 1;
-    private static final Integer UPDATED_CONSEILLERID = 2;
 
     @Autowired
     private ClientRepository clientRepository;
@@ -78,13 +72,11 @@ public class ClientResourceIT {
      */
     public static Client createEntity(EntityManager em) {
         Client client = new Client()
-            .clientid(DEFAULT_CLIENTID)
             .nom(DEFAULT_NOM)
             .prenom(DEFAULT_PRENOM)
             .tel(DEFAULT_TEL)
             .adresse(DEFAULT_ADRESSE)
-            .email(DEFAULT_EMAIL)
-            .conseillerid(DEFAULT_CONSEILLERID);
+            .email(DEFAULT_EMAIL);
         return client;
     }
     /**
@@ -95,13 +87,11 @@ public class ClientResourceIT {
      */
     public static Client createUpdatedEntity(EntityManager em) {
         Client client = new Client()
-            .clientid(UPDATED_CLIENTID)
             .nom(UPDATED_NOM)
             .prenom(UPDATED_PRENOM)
             .tel(UPDATED_TEL)
             .adresse(UPDATED_ADRESSE)
-            .email(UPDATED_EMAIL)
-            .conseillerid(UPDATED_CONSEILLERID);
+            .email(UPDATED_EMAIL);
         return client;
     }
 
@@ -125,13 +115,11 @@ public class ClientResourceIT {
         List<Client> clientList = clientRepository.findAll();
         assertThat(clientList).hasSize(databaseSizeBeforeCreate + 1);
         Client testClient = clientList.get(clientList.size() - 1);
-        assertThat(testClient.getClientid()).isEqualTo(DEFAULT_CLIENTID);
         assertThat(testClient.getNom()).isEqualTo(DEFAULT_NOM);
         assertThat(testClient.getPrenom()).isEqualTo(DEFAULT_PRENOM);
         assertThat(testClient.getTel()).isEqualTo(DEFAULT_TEL);
         assertThat(testClient.getAdresse()).isEqualTo(DEFAULT_ADRESSE);
         assertThat(testClient.getEmail()).isEqualTo(DEFAULT_EMAIL);
-        assertThat(testClient.getConseillerid()).isEqualTo(DEFAULT_CONSEILLERID);
     }
 
     @Test
@@ -154,26 +142,6 @@ public class ClientResourceIT {
         assertThat(clientList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkClientidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = clientRepository.findAll().size();
-        // set the field null
-        client.setClientid(null);
-
-        // Create the Client, which fails.
-        ClientDTO clientDTO = clientMapper.toDto(client);
-
-
-        restClientMockMvc.perform(post("/api/clients")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(clientDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Client> clientList = clientRepository.findAll();
-        assertThat(clientList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -277,26 +245,6 @@ public class ClientResourceIT {
 
     @Test
     @Transactional
-    public void checkConseilleridIsRequired() throws Exception {
-        int databaseSizeBeforeTest = clientRepository.findAll().size();
-        // set the field null
-        client.setConseillerid(null);
-
-        // Create the Client, which fails.
-        ClientDTO clientDTO = clientMapper.toDto(client);
-
-
-        restClientMockMvc.perform(post("/api/clients")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(clientDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Client> clientList = clientRepository.findAll();
-        assertThat(clientList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllClients() throws Exception {
         // Initialize the database
         clientRepository.saveAndFlush(client);
@@ -306,13 +254,11 @@ public class ClientResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(client.getId().intValue())))
-            .andExpect(jsonPath("$.[*].clientid").value(hasItem(DEFAULT_CLIENTID)))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM)))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM)))
             .andExpect(jsonPath("$.[*].tel").value(hasItem(DEFAULT_TEL)))
             .andExpect(jsonPath("$.[*].adresse").value(hasItem(DEFAULT_ADRESSE)))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
-            .andExpect(jsonPath("$.[*].conseillerid").value(hasItem(DEFAULT_CONSEILLERID)));
+            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
     
     @Test
@@ -326,13 +272,11 @@ public class ClientResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(client.getId().intValue()))
-            .andExpect(jsonPath("$.clientid").value(DEFAULT_CLIENTID))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM))
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM))
             .andExpect(jsonPath("$.tel").value(DEFAULT_TEL))
             .andExpect(jsonPath("$.adresse").value(DEFAULT_ADRESSE))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL))
-            .andExpect(jsonPath("$.conseillerid").value(DEFAULT_CONSEILLERID));
+            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL));
     }
     @Test
     @Transactional
@@ -355,13 +299,11 @@ public class ClientResourceIT {
         // Disconnect from session so that the updates on updatedClient are not directly saved in db
         em.detach(updatedClient);
         updatedClient
-            .clientid(UPDATED_CLIENTID)
             .nom(UPDATED_NOM)
             .prenom(UPDATED_PRENOM)
             .tel(UPDATED_TEL)
             .adresse(UPDATED_ADRESSE)
-            .email(UPDATED_EMAIL)
-            .conseillerid(UPDATED_CONSEILLERID);
+            .email(UPDATED_EMAIL);
         ClientDTO clientDTO = clientMapper.toDto(updatedClient);
 
         restClientMockMvc.perform(put("/api/clients")
@@ -373,13 +315,11 @@ public class ClientResourceIT {
         List<Client> clientList = clientRepository.findAll();
         assertThat(clientList).hasSize(databaseSizeBeforeUpdate);
         Client testClient = clientList.get(clientList.size() - 1);
-        assertThat(testClient.getClientid()).isEqualTo(UPDATED_CLIENTID);
         assertThat(testClient.getNom()).isEqualTo(UPDATED_NOM);
         assertThat(testClient.getPrenom()).isEqualTo(UPDATED_PRENOM);
         assertThat(testClient.getTel()).isEqualTo(UPDATED_TEL);
         assertThat(testClient.getAdresse()).isEqualTo(UPDATED_ADRESSE);
         assertThat(testClient.getEmail()).isEqualTo(UPDATED_EMAIL);
-        assertThat(testClient.getConseillerid()).isEqualTo(UPDATED_CONSEILLERID);
     }
 
     @Test

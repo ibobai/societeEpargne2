@@ -23,7 +23,6 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="conseillerid"><span>Conseillerid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="prenom"><span>Prenom</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="tel"><span>Tel</span> <fa-icon icon="sort"></fa-icon></th>
@@ -37,7 +36,6 @@
             <tbody>
                 <tr *ngFor="let conseiller of conseillers ;trackBy: trackId">
                     <td><a [routerLink]="['/conseiller', conseiller.id, 'view']">{{ conseiller.id }}</a></td>
-                    <td>{{ conseiller.conseillerid }}</td>
                     <td>{{ conseiller.nom }}</td>
                     <td>{{ conseiller.prenom }}</td>
                     <td>{{ conseiller.tel }}</td>

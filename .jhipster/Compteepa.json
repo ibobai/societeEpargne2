@@ -2,22 +2,12 @@
   "name": "Compteepa",
   "fields": [
     {
-      "fieldName": "compteepaid",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "tauxinteret",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
     },
     {
       "fieldName": "plafond",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "compteid",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
     }

@@ -20,10 +20,6 @@ public class Client implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "clientid", nullable = false)
-    private Integer clientid;
-
-    @NotNull
     @Size(max = 50)
     @Column(name = "nom", length = 50, nullable = false)
     private String nom;
@@ -48,10 +44,6 @@ public class Client implements Serializable {
     @Column(name = "email", length = 100, nullable = false)
     private String email;
 
-    @NotNull
-    @Column(name = "conseillerid", nullable = false)
-    private Integer conseillerid;
-
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
@@ -67,19 +59,6 @@ public class Client implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getClientid() {
-        return clientid;
-    }
-
-    public Client clientid(Integer clientid) {
-        this.clientid = clientid;
-        return this;
-    }
-
-    public void setClientid(Integer clientid) {
-        this.clientid = clientid;
     }
 
     public String getNom() {
@@ -147,19 +126,6 @@ public class Client implements Serializable {
         this.email = email;
     }
 
-    public Integer getConseillerid() {
-        return conseillerid;
-    }
-
-    public Client conseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-        return this;
-    }
-
-    public void setConseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-    }
-
     public User getUser() {
         return user;
     }
@@ -208,13 +174,11 @@ public class Client implements Serializable {
     public String toString() {
         return "Client{" +
             "id=" + getId() +
-            ", clientid=" + getClientid() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", tel='" + getTel() + "'" +
             ", adresse='" + getAdresse() + "'" +
             ", email='" + getEmail() + "'" +
-            ", conseillerid=" + getConseillerid() +
             "}";
     }
 }

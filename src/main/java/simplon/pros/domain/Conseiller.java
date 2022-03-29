@@ -20,10 +20,6 @@ public class Conseiller implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "conseillerid", nullable = false)
-    private Integer conseillerid;
-
-    @NotNull
     @Size(max = 50)
     @Column(name = "nom", length = 50, nullable = false)
     private String nom;
@@ -64,19 +60,6 @@ public class Conseiller implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getConseillerid() {
-        return conseillerid;
-    }
-
-    public Conseiller conseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-        return this;
-    }
-
-    public void setConseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
     }
 
     public String getNom() {
@@ -192,7 +175,6 @@ public class Conseiller implements Serializable {
     public String toString() {
         return "Conseiller{" +
             "id=" + getId() +
-            ", conseillerid=" + getConseillerid() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", tel='" + getTel() + "'" +

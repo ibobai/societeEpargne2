@@ -21,10 +21,6 @@ public class Transfert implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "transfertid", nullable = false)
-    private Integer transfertid;
-
     @Column(name = "date")
     private LocalDate date;
 
@@ -41,10 +37,6 @@ public class Transfert implements Serializable {
     @Column(name = "numcompte", nullable = false)
     private Integer numcompte;
 
-    @NotNull
-    @Column(name = "conseillerid", nullable = false)
-    private Integer conseillerid;
-
     @ManyToOne
     @JsonIgnoreProperties(value = "transferts", allowSetters = true)
     private Compte compte;
@@ -56,19 +48,6 @@ public class Transfert implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getTransfertid() {
-        return transfertid;
-    }
-
-    public Transfert transfertid(Integer transfertid) {
-        this.transfertid = transfertid;
-        return this;
-    }
-
-    public void setTransfertid(Integer transfertid) {
-        this.transfertid = transfertid;
     }
 
     public LocalDate getDate() {
@@ -123,19 +102,6 @@ public class Transfert implements Serializable {
         this.numcompte = numcompte;
     }
 
-    public Integer getConseillerid() {
-        return conseillerid;
-    }
-
-    public Transfert conseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-        return this;
-    }
-
-    public void setConseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-    }
-
     public Compte getCompte() {
         return compte;
     }
@@ -171,12 +137,10 @@ public class Transfert implements Serializable {
     public String toString() {
         return "Transfert{" +
             "id=" + getId() +
-            ", transfertid=" + getTransfertid() +
             ", date='" + getDate() + "'" +
             ", montant=" + getMontant() +
             ", typeoperation='" + getTypeoperation() + "'" +
             ", numcompte=" + getNumcompte() +
-            ", conseillerid=" + getConseillerid() +
             "}";
     }
 }

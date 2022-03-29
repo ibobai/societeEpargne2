@@ -11,9 +11,6 @@ public class TransfertDTO implements Serializable {
     
     private Long id;
 
-    @NotNull
-    private Integer transfertid;
-
     private LocalDate date;
 
     @NotNull
@@ -26,9 +23,6 @@ public class TransfertDTO implements Serializable {
     @NotNull
     private Integer numcompte;
 
-    @NotNull
-    private Integer conseillerid;
-
 
     private Long compteId;
     
@@ -38,14 +32,6 @@ public class TransfertDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getTransfertid() {
-        return transfertid;
-    }
-
-    public void setTransfertid(Integer transfertid) {
-        this.transfertid = transfertid;
     }
 
     public LocalDate getDate() {
@@ -80,14 +66,6 @@ public class TransfertDTO implements Serializable {
         this.numcompte = numcompte;
     }
 
-    public Integer getConseillerid() {
-        return conseillerid;
-    }
-
-    public void setConseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-    }
-
     public Long getCompteId() {
         return compteId;
     }
@@ -118,12 +96,10 @@ public class TransfertDTO implements Serializable {
     public String toString() {
         return "TransfertDTO{" +
             "id=" + getId() +
-            ", transfertid=" + getTransfertid() +
             ", date='" + getDate() + "'" +
             ", montant=" + getMontant() +
             ", typeoperation='" + getTypeoperation() + "'" +
             ", numcompte=" + getNumcompte() +
-            ", conseillerid=" + getConseillerid() +
             ", compteId=" + getCompteId() +
             "}";
     }

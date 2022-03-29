@@ -16,9 +16,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="transfertid" type="integer">
-                <constraints nullable="false" />
-            </column>
             <column name="date" type="date">
                 <constraints nullable="true" />
             </column>
@@ -29,9 +26,6 @@
                 <constraints nullable="false" />
             </column>
             <column name="numcompte" type="integer">
-                <constraints nullable="false" />
-            </column>
-            <column name="conseillerid" type="integer">
                 <constraints nullable="false" />
             </column>
             <column name="compte_id" type="bigint">
@@ -60,12 +54,10 @@
                   separator=";"
                   tableName="transfert">
             <column name="id" type="numeric"/>
-            <column name="transfertid" type="numeric"/>
             <column name="date" type="date"/>
             <column name="montant" type="numeric"/>
             <column name="typeoperation" type="string"/>
             <column name="numcompte" type="numeric"/>
-            <column name="conseillerid" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

@@ -16,20 +16,11 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="compteid" type="integer">
-                <constraints nullable="false" />
-            </column>
             <column name="numcom" type="integer">
                 <constraints nullable="false" />
             </column>
             <column name="solde" type="double">
                 <constraints nullable="false" />
-            </column>
-            <column name="clientid" type="integer">
-                <constraints nullable="false" />
-            </column>
-            <column name="compte_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_compte_compte_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
         </createTable>
@@ -54,10 +45,8 @@
                   separator=";"
                   tableName="compte">
             <column name="id" type="numeric"/>
-            <column name="compteid" type="numeric"/>
             <column name="numcom" type="numeric"/>
             <column name="solde" type="numeric"/>
-            <column name="clientid" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>
     </changeSet>

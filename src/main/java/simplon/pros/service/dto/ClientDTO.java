@@ -11,9 +11,6 @@ public class ClientDTO implements Serializable {
     private Long id;
 
     @NotNull
-    private Integer clientid;
-
-    @NotNull
     @Size(max = 50)
     private String nom;
 
@@ -33,9 +30,6 @@ public class ClientDTO implements Serializable {
     @Size(max = 100)
     private String email;
 
-    @NotNull
-    private Integer conseillerid;
-
 
     private Long userId;
 
@@ -47,14 +41,6 @@ public class ClientDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getClientid() {
-        return clientid;
-    }
-
-    public void setClientid(Integer clientid) {
-        this.clientid = clientid;
     }
 
     public String getNom() {
@@ -97,14 +83,6 @@ public class ClientDTO implements Serializable {
         this.email = email;
     }
 
-    public Integer getConseillerid() {
-        return conseillerid;
-    }
-
-    public void setConseillerid(Integer conseillerid) {
-        this.conseillerid = conseillerid;
-    }
-
     public Long getUserId() {
         return userId;
     }
@@ -143,13 +121,11 @@ public class ClientDTO implements Serializable {
     public String toString() {
         return "ClientDTO{" +
             "id=" + getId() +
-            ", clientid=" + getClientid() +
             ", nom='" + getNom() + "'" +
             ", prenom='" + getPrenom() + "'" +
             ", tel='" + getTel() + "'" +
             ", adresse='" + getAdresse() + "'" +
             ", email='" + getEmail() + "'" +
-            ", conseillerid=" + getConseillerid() +
             ", userId=" + getUserId() +
             ", compteId=" + getCompteId() +
             "}";

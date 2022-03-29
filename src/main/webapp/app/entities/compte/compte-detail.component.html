@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span>Compteid</span></dt>
-                <dd>
-                    <span>{{ compte.compteid }}</span>
-                </dd>
                 <dt><span>Numcom</span></dt>
                 <dd>
                     <span>{{ compte.numcom }}</span>
@@ -19,16 +15,6 @@
                 <dt><span>Solde</span></dt>
                 <dd>
                     <span>{{ compte.solde }}</span>
-                </dd>
-                <dt><span>Clientid</span></dt>
-                <dd>
-                    <span>{{ compte.clientid }}</span>
-                </dd>
-                <dt><span>Compte</span></dt>
-                <dd>
-                    <div *ngIf="compte.compteId">
-                        <a [routerLink]="['/compte', compte.compteId, 'view']">{{ compte.compteId }}</a>
-                    </div>
                 </dd>
             </dl>
 

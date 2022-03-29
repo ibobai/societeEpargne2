@@ -34,9 +34,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class TransfertResourceIT {
 
-    private static final Integer DEFAULT_TRANSFERTID = 1;
-    private static final Integer UPDATED_TRANSFERTID = 2;
-
     private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
@@ -48,9 +45,6 @@ public class TransfertResourceIT {
 
     private static final Integer DEFAULT_NUMCOMPTE = 1;
     private static final Integer UPDATED_NUMCOMPTE = 2;
-
-    private static final Integer DEFAULT_CONSEILLERID = 1;
-    private static final Integer UPDATED_CONSEILLERID = 2;
 
     @Autowired
     private TransfertRepository transfertRepository;
@@ -77,12 +71,10 @@ public class TransfertResourceIT {
      */
     public static Transfert createEntity(EntityManager em) {
         Transfert transfert = new Transfert()
-            .transfertid(DEFAULT_TRANSFERTID)
             .date(DEFAULT_DATE)
             .montant(DEFAULT_MONTANT)
             .typeoperation(DEFAULT_TYPEOPERATION)
-            .numcompte(DEFAULT_NUMCOMPTE)
-            .conseillerid(DEFAULT_CONSEILLERID);
+            .numcompte(DEFAULT_NUMCOMPTE);
         return transfert;
     }
     /**
@@ -93,12 +85,10 @@ public class TransfertResourceIT {
      */
     public static Transfert createUpdatedEntity(EntityManager em) {
         Transfert transfert = new Transfert()
-            .transfertid(UPDATED_TRANSFERTID)
             .date(UPDATED_DATE)
             .montant(UPDATED_MONTANT)
             .typeoperation(UPDATED_TYPEOPERATION)
-            .numcompte(UPDATED_NUMCOMPTE)
-            .conseillerid(UPDATED_CONSEILLERID);
+            .numcompte(UPDATED_NUMCOMPTE);
         return transfert;
     }
 
@@ -122,12 +112,10 @@ public class TransfertResourceIT {
         List<Transfert> transfertList = transfertRepository.findAll();
         assertThat(transfertList).hasSize(databaseSizeBeforeCreate + 1);
         Transfert testTransfert = transfertList.get(transfertList.size() - 1);
-        assertThat(testTransfert.getTransfertid()).isEqualTo(DEFAULT_TRANSFERTID);
         assertThat(testTransfert.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testTransfert.getMontant()).isEqualTo(DEFAULT_MONTANT);
         assertThat(testTransfert.getTypeoperation()).isEqualTo(DEFAULT_TYPEOPERATION);
         assertThat(testTransfert.getNumcompte()).isEqualTo(DEFAULT_NUMCOMPTE);
-        assertThat(testTransfert.getConseillerid()).isEqualTo(DEFAULT_CONSEILLERID);
     }
 
     @Test
@@ -150,26 +138,6 @@ public class TransfertResourceIT {
         assertThat(transfertList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkTransfertidIsRequired() throws Exception {
-        int databaseSizeBeforeTest = transfertRepository.findAll().size();
-        // set the field null
-        transfert.setTransfertid(null);
-
-        // Create the Transfert, which fails.
-        TransfertDTO transfertDTO = transfertMapper.toDto(transfert);
-
-
-        restTransfertMockMvc.perform(post("/api/transferts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transfertDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Transfert> transfertList = transfertRepository.findAll();
-        assertThat(transfertList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -233,26 +201,6 @@ public class TransfertResourceIT {
 
     @Test
     @Transactional
-    public void checkConseilleridIsRequired() throws Exception {
-        int databaseSizeBeforeTest = transfertRepository.findAll().size();
-        // set the field null
-        transfert.setConseillerid(null);
-
-        // Create the Transfert, which fails.
-        TransfertDTO transfertDTO = transfertMapper.toDto(transfert);
-
-
-        restTransfertMockMvc.perform(post("/api/transferts")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(transfertDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Transfert> transfertList = transfertRepository.findAll();
-        assertThat(transfertList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllTransferts() throws Exception {
         // Initialize the database
         transfertRepository.saveAndFlush(transfert);
@@ -262,12 +210,10 @@ public class TransfertResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(transfert.getId().intValue())))
-            .andExpect(jsonPath("$.[*].transfertid").value(hasItem(DEFAULT_TRANSFERTID)))
             .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].montant").value(hasItem(DEFAULT_MONTANT.doubleValue())))
             .andExpect(jsonPath("$.[*].typeoperation").value(hasItem(DEFAULT_TYPEOPERATION)))
-            .andExpect(jsonPath("$.[*].numcompte").value(hasItem(DEFAULT_NUMCOMPTE)))
-            .andExpect(jsonPath("$.[*].conseillerid").value(hasItem(DEFAULT_CONSEILLERID)));
+            .andExpect(jsonPath("$.[*].numcompte").value(hasItem(DEFAULT_NUMCOMPTE)));
     }
     
     @Test
@@ -281,12 +227,10 @@ public class TransfertResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(transfert.getId().intValue()))
-            .andExpect(jsonPath("$.transfertid").value(DEFAULT_TRANSFERTID))
             .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.montant").value(DEFAULT_MONTANT.doubleValue()))
             .andExpect(jsonPath("$.typeoperation").value(DEFAULT_TYPEOPERATION))
-            .andExpect(jsonPath("$.numcompte").value(DEFAULT_NUMCOMPTE))
-            .andExpect(jsonPath("$.conseillerid").value(DEFAULT_CONSEILLERID));
+            .andExpect(jsonPath("$.numcompte").value(DEFAULT_NUMCOMPTE));
     }
     @Test
     @Transactional
@@ -309,12 +253,10 @@ public class TransfertResourceIT {
         // Disconnect from session so that the updates on updatedTransfert are not directly saved in db
         em.detach(updatedTransfert);
         updatedTransfert
-            .transfertid(UPDATED_TRANSFERTID)
             .date(UPDATED_DATE)
             .montant(UPDATED_MONTANT)
             .typeoperation(UPDATED_TYPEOPERATION)
-            .numcompte(UPDATED_NUMCOMPTE)
-            .conseillerid(UPDATED_CONSEILLERID);
+            .numcompte(UPDATED_NUMCOMPTE);
         TransfertDTO transfertDTO = transfertMapper.toDto(updatedTransfert);
 
         restTransfertMockMvc.perform(put("/api/transferts")
@@ -326,12 +268,10 @@ public class TransfertResourceIT {
         List<Transfert> transfertList = transfertRepository.findAll();
         assertThat(transfertList).hasSize(databaseSizeBeforeUpdate);
         Transfert testTransfert = transfertList.get(transfertList.size() - 1);
-        assertThat(testTransfert.getTransfertid()).isEqualTo(UPDATED_TRANSFERTID);
         assertThat(testTransfert.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testTransfert.getMontant()).isEqualTo(UPDATED_MONTANT);
         assertThat(testTransfert.getTypeoperation()).isEqualTo(UPDATED_TYPEOPERATION);
         assertThat(testTransfert.getNumcompte()).isEqualTo(UPDATED_NUMCOMPTE);
-        assertThat(testTransfert.getConseillerid()).isEqualTo(UPDATED_CONSEILLERID);
     }
 
     @Test

@@ -20,7 +20,6 @@ export class ConseillerUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    conseillerid: [null, [Validators.required]],
     nom: [null, [Validators.required, Validators.maxLength(50)]],
     prenom: [null, [Validators.required, Validators.maxLength(50)]],
     tel: [null, [Validators.required, Validators.maxLength(50)]],
@@ -48,7 +47,6 @@ export class ConseillerUpdateComponent implements OnInit {
   updateForm(conseiller: IConseiller): void {
     this.editForm.patchValue({
       id: conseiller.id,
-      conseillerid: conseiller.conseillerid,
       nom: conseiller.nom,
       prenom: conseiller.prenom,
       tel: conseiller.tel,
@@ -77,7 +75,6 @@ export class ConseillerUpdateComponent implements OnInit {
     return {
       ...new Conseiller(),
       id: this.editForm.get(['id'])!.value,
-      conseillerid: this.editForm.get(['conseillerid'])!.value,
       nom: this.editForm.get(['nom'])!.value,
       prenom: this.editForm.get(['prenom'])!.value,
       tel: this.editForm.get(['tel'])!.value,

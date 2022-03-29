@@ -2,11 +2,6 @@
   "name": "Conseiller",
   "fields": [
     {
-      "fieldName": "conseillerid",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "nom",
       "fieldType": "String",
       "fieldValidateRules": ["required", "maxlength"],

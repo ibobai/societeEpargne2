@@ -21,20 +21,12 @@ public class Comptecou implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "comptecouid", nullable = false)
-    private Integer comptecouid;
-
-    @NotNull
     @Column(name = "fraistrans", nullable = false)
     private Integer fraistrans;
 
     @NotNull
     @Column(name = "soldemin", nullable = false)
     private Double soldemin;
-
-    @NotNull
-    @Column(name = "compteid", nullable = false)
-    private Integer compteid;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "comptecous", allowSetters = true)
@@ -47,19 +39,6 @@ public class Comptecou implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getComptecouid() {
-        return comptecouid;
-    }
-
-    public Comptecou comptecouid(Integer comptecouid) {
-        this.comptecouid = comptecouid;
-        return this;
-    }
-
-    public void setComptecouid(Integer comptecouid) {
-        this.comptecouid = comptecouid;
     }
 
     public Integer getFraistrans() {
@@ -86,19 +65,6 @@ public class Comptecou implements Serializable {
 
     public void setSoldemin(Double soldemin) {
         this.soldemin = soldemin;
-    }
-
-    public Integer getCompteid() {
-        return compteid;
-    }
-
-    public Comptecou compteid(Integer compteid) {
-        this.compteid = compteid;
-        return this;
-    }
-
-    public void setCompteid(Integer compteid) {
-        this.compteid = compteid;
     }
 
     public Compte getCompte() {
@@ -136,10 +102,8 @@ public class Comptecou implements Serializable {
     public String toString() {
         return "Comptecou{" +
             "id=" + getId() +
-            ", comptecouid=" + getComptecouid() +
             ", fraistrans=" + getFraistrans() +
             ", soldemin=" + getSoldemin() +
-            ", compteid=" + getCompteid() +
             "}";
     }
 }

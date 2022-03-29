@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(CompteService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Compte(0, 0, 0, 0, 0);
+      elemDefault = new Compte(0, 0, 0);
     });
 
     describe('Service methods', () => {
@@ -54,10 +54,8 @@ describe('Service Tests', () => {
       it('should update a Compte', () => {
         const returnedFromService = Object.assign(
           {
-            compteid: 1,
             numcom: 1,
             solde: 1,
-            clientid: 1,
           },
           elemDefault
         );
@@ -74,10 +72,8 @@ describe('Service Tests', () => {
       it('should return a list of Compte', () => {
         const returnedFromService = Object.assign(
           {
-            compteid: 1,
             numcom: 1,
             solde: 1,
-            clientid: 1,
           },
           elemDefault
         );

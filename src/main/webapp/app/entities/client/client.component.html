@@ -23,13 +23,11 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="clientid"><span>Clientid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="prenom"><span>Prenom</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="tel"><span>Tel</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="adresse"><span>Adresse</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="email"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="conseillerid"><span>Conseillerid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="userId"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="compteId"><span>Compte</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
@@ -38,13 +36,11 @@
             <tbody>
                 <tr *ngFor="let client of clients ;trackBy: trackId">
                     <td><a [routerLink]="['/client', client.id, 'view']">{{ client.id }}</a></td>
-                    <td>{{ client.clientid }}</td>
                     <td>{{ client.nom }}</td>
                     <td>{{ client.prenom }}</td>
                     <td>{{ client.tel }}</td>
                     <td>{{ client.adresse }}</td>
                     <td>{{ client.email }}</td>
-                    <td>{{ client.conseillerid }}</td>
                     <td>
                         {{ client.userId }}
                     </td>

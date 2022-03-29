@@ -23,10 +23,8 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="compteepaid"><span>Compteepaid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="tauxinteret"><span>Tauxinteret</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="plafond"><span>Plafond</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="compteid"><span>Compteid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="compteId"><span>Compte</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
@@ -34,10 +32,8 @@
             <tbody>
                 <tr *ngFor="let compteepa of compteepas ;trackBy: trackId">
                     <td><a [routerLink]="['/compteepa', compteepa.id, 'view']">{{ compteepa.id }}</a></td>
-                    <td>{{ compteepa.compteepaid }}</td>
                     <td>{{ compteepa.tauxinteret }}</td>
                     <td>{{ compteepa.plafond }}</td>
-                    <td>{{ compteepa.compteid }}</td>
                     <td>
                         <div *ngIf="compteepa.compteId">
                             <a [routerLink]="['/compte', compteepa.compteId , 'view']" >{{ compteepa.compteId }}</a>

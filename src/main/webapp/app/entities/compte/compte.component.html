@@ -23,26 +23,16 @@
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="compteid"><span>Compteid</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="numcom"><span>Numcom</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="solde"><span>Solde</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="clientid"><span>Clientid</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="compteId"><span>Compte</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let compte of comptes ;trackBy: trackId">
                     <td><a [routerLink]="['/compte', compte.id, 'view']">{{ compte.id }}</a></td>
-                    <td>{{ compte.compteid }}</td>
                     <td>{{ compte.numcom }}</td>
                     <td>{{ compte.solde }}</td>
-                    <td>{{ compte.clientid }}</td>
-                    <td>
-                        <div *ngIf="compte.compteId">
-                            <a [routerLink]="['/compte', compte.compteId , 'view']" >{{ compte.compteId }}</a>
-                        </div>
-                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

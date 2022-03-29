@@ -12,22 +12,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" for="field_compteepaid">Compteepaid</label>
-                    <input type="number" class="form-control" name="compteepaid" id="field_compteepaid"
-                           formControlName="compteepaid"/>
-                    <div *ngIf="editForm.get('compteepaid')!.invalid && (editForm.get('compteepaid')!.dirty || editForm.get('compteepaid')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('compteepaid')?.errors?.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('compteepaid')?.errors?.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" for="field_tauxinteret">Tauxinteret</label>
                     <input type="number" class="form-control" name="tauxinteret" id="field_tauxinteret"
                            formControlName="tauxinteret"/>
@@ -54,22 +38,6 @@
                         </small>
                         <small class="form-text text-danger"
                             [hidden]="!editForm.get('plafond')?.errors?.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-control-label" for="field_compteid">Compteid</label>
-                    <input type="number" class="form-control" name="compteid" id="field_compteid"
-                           formControlName="compteid"/>
-                    <div *ngIf="editForm.get('compteid')!.invalid && (editForm.get('compteid')!.dirty || editForm.get('compteid')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('compteid')?.errors?.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('compteid')?.errors?.number">
                             This field should be a number.
                         </small>
                     </div>

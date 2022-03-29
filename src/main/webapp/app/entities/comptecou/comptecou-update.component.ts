@@ -20,10 +20,8 @@ export class ComptecouUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    comptecouid: [null, [Validators.required]],
     fraistrans: [null, [Validators.required]],
     soldemin: [null, [Validators.required]],
-    compteid: [null, [Validators.required]],
     compteId: [],
   });
 
@@ -45,10 +43,8 @@ export class ComptecouUpdateComponent implements OnInit {
   updateForm(comptecou: IComptecou): void {
     this.editForm.patchValue({
       id: comptecou.id,
-      comptecouid: comptecou.comptecouid,
       fraistrans: comptecou.fraistrans,
       soldemin: comptecou.soldemin,
-      compteid: comptecou.compteid,
       compteId: comptecou.compteId,
     });
   }
@@ -71,10 +67,8 @@ export class ComptecouUpdateComponent implements OnInit {
     return {
       ...new Comptecou(),
       id: this.editForm.get(['id'])!.value,
-      comptecouid: this.editForm.get(['comptecouid'])!.value,
       fraistrans: this.editForm.get(['fraistrans'])!.value,
       soldemin: this.editForm.get(['soldemin'])!.value,
-      compteid: this.editForm.get(['compteid'])!.value,
       compteId: this.editForm.get(['compteId'])!.value,
     };
   }

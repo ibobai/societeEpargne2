@@ -32,9 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WithMockUser
 public class ConseillerResourceIT {
 
-    private static final Integer DEFAULT_CONSEILLERID = 1;
-    private static final Integer UPDATED_CONSEILLERID = 2;
-
     private static final String DEFAULT_NOM = "AAAAAAAAAA";
     private static final String UPDATED_NOM = "BBBBBBBBBB";
 
@@ -78,7 +75,6 @@ public class ConseillerResourceIT {
      */
     public static Conseiller createEntity(EntityManager em) {
         Conseiller conseiller = new Conseiller()
-            .conseillerid(DEFAULT_CONSEILLERID)
             .nom(DEFAULT_NOM)
             .prenom(DEFAULT_PRENOM)
             .tel(DEFAULT_TEL)
@@ -95,7 +91,6 @@ public class ConseillerResourceIT {
      */
     public static Conseiller createUpdatedEntity(EntityManager em) {
         Conseiller conseiller = new Conseiller()
-            .conseillerid(UPDATED_CONSEILLERID)
             .nom(UPDATED_NOM)
             .prenom(UPDATED_PRENOM)
             .tel(UPDATED_TEL)
@@ -125,7 +120,6 @@ public class ConseillerResourceIT {
         List<Conseiller> conseillerList = conseillerRepository.findAll();
         assertThat(conseillerList).hasSize(databaseSizeBeforeCreate + 1);
         Conseiller testConseiller = conseillerList.get(conseillerList.size() - 1);
-        assertThat(testConseiller.getConseillerid()).isEqualTo(DEFAULT_CONSEILLERID);
         assertThat(testConseiller.getNom()).isEqualTo(DEFAULT_NOM);
         assertThat(testConseiller.getPrenom()).isEqualTo(DEFAULT_PRENOM);
         assertThat(testConseiller.getTel()).isEqualTo(DEFAULT_TEL);
@@ -154,26 +148,6 @@ public class ConseillerResourceIT {
         assertThat(conseillerList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkConseilleridIsRequired() throws Exception {
-        int databaseSizeBeforeTest = conseillerRepository.findAll().size();
-        // set the field null
-        conseiller.setConseillerid(null);
-
-        // Create the Conseiller, which fails.
-        ConseillerDTO conseillerDTO = conseillerMapper.toDto(conseiller);
-
-
-        restConseillerMockMvc.perform(post("/api/conseillers")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(conseillerDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<Conseiller> conseillerList = conseillerRepository.findAll();
-        assertThat(conseillerList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -306,7 +280,6 @@ public class ConseillerResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(conseiller.getId().intValue())))
-            .andExpect(jsonPath("$.[*].conseillerid").value(hasItem(DEFAULT_CONSEILLERID)))
             .andExpect(jsonPath("$.[*].nom").value(hasItem(DEFAULT_NOM)))
             .andExpect(jsonPath("$.[*].prenom").value(hasItem(DEFAULT_PRENOM)))
             .andExpect(jsonPath("$.[*].tel").value(hasItem(DEFAULT_TEL)))
@@ -326,7 +299,6 @@ public class ConseillerResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(conseiller.getId().intValue()))
-            .andExpect(jsonPath("$.conseillerid").value(DEFAULT_CONSEILLERID))
             .andExpect(jsonPath("$.nom").value(DEFAULT_NOM))
             .andExpect(jsonPath("$.prenom").value(DEFAULT_PRENOM))
             .andExpect(jsonPath("$.tel").value(DEFAULT_TEL))
@@ -355,7 +327,6 @@ public class ConseillerResourceIT {
         // Disconnect from session so that the updates on updatedConseiller are not directly saved in db
         em.detach(updatedConseiller);
         updatedConseiller
-            .conseillerid(UPDATED_CONSEILLERID)
             .nom(UPDATED_NOM)
             .prenom(UPDATED_PRENOM)
             .tel(UPDATED_TEL)
@@ -373,7 +344,6 @@ public class ConseillerResourceIT {
         List<Conseiller> conseillerList = conseillerRepository.findAll();
         assertThat(conseillerList).hasSize(databaseSizeBeforeUpdate);
         Conseiller testConseiller = conseillerList.get(conseillerList.size() - 1);
-        assertThat(testConseiller.getConseillerid()).isEqualTo(UPDATED_CONSEILLERID);
         assertThat(testConseiller.getNom()).isEqualTo(UPDATED_NOM);
         assertThat(testConseiller.getPrenom()).isEqualTo(UPDATED_PRENOM);
         assertThat(testConseiller.getTel()).isEqualTo(UPDATED_TEL);

@@ -20,10 +20,8 @@ export class CompteepaUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    compteepaid: [null, [Validators.required]],
     tauxinteret: [null, [Validators.required]],
     plafond: [null, [Validators.required]],
-    compteid: [null, [Validators.required]],
     compteId: [],
   });
 
@@ -45,10 +43,8 @@ export class CompteepaUpdateComponent implements OnInit {
   updateForm(compteepa: ICompteepa): void {
     this.editForm.patchValue({
       id: compteepa.id,
-      compteepaid: compteepa.compteepaid,
       tauxinteret: compteepa.tauxinteret,
       plafond: compteepa.plafond,
-      compteid: compteepa.compteid,
       compteId: compteepa.compteId,
     });
   }
@@ -71,10 +67,8 @@ export class CompteepaUpdateComponent implements OnInit {
     return {
       ...new Compteepa(),
       id: this.editForm.get(['id'])!.value,
-      compteepaid: this.editForm.get(['compteepaid'])!.value,
       tauxinteret: this.editForm.get(['tauxinteret'])!.value,
       plafond: this.editForm.get(['plafond'])!.value,
-      compteid: this.editForm.get(['compteid'])!.value,
       compteId: this.editForm.get(['compteId'])!.value,
     };
   }

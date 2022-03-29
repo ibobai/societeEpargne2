@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Transfert(0, 0, currentDate, 0, 'AAAAAAA', 0, 0);
+      elemDefault = new Transfert(0, currentDate, 0, 'AAAAAAA', 0);
     });
 
     describe('Service methods', () => {
@@ -69,12 +69,10 @@ describe('Service Tests', () => {
       it('should update a Transfert', () => {
         const returnedFromService = Object.assign(
           {
-            transfertid: 1,
             date: currentDate.format(DATE_FORMAT),
             montant: 1,
             typeoperation: 'BBBBBB',
             numcompte: 1,
-            conseillerid: 1,
           },
           elemDefault
         );
@@ -96,12 +94,10 @@ describe('Service Tests', () => {
       it('should return a list of Transfert', () => {
         const returnedFromService = Object.assign(
           {
-            transfertid: 1,
             date: currentDate.format(DATE_FORMAT),
             montant: 1,
             typeoperation: 'BBBBBB',
             numcompte: 1,
-            conseillerid: 1,
           },
           elemDefault
         );

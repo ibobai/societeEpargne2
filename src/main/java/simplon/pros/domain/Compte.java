@@ -20,24 +20,12 @@ public class Compte implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "compteid", nullable = false)
-    private Integer compteid;
-
-    @NotNull
     @Column(name = "numcom", nullable = false)
     private Integer numcom;
 
     @NotNull
     @Column(name = "solde", nullable = false)
     private Double solde;
-
-    @NotNull
-    @Column(name = "clientid", nullable = false)
-    private Integer clientid;
-
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Compte compte;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -46,19 +34,6 @@ public class Compte implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getCompteid() {
-        return compteid;
-    }
-
-    public Compte compteid(Integer compteid) {
-        this.compteid = compteid;
-        return this;
-    }
-
-    public void setCompteid(Integer compteid) {
-        this.compteid = compteid;
     }
 
     public Integer getNumcom() {
@@ -86,32 +61,6 @@ public class Compte implements Serializable {
     public void setSolde(Double solde) {
         this.solde = solde;
     }
-
-    public Integer getClientid() {
-        return clientid;
-    }
-
-    public Compte clientid(Integer clientid) {
-        this.clientid = clientid;
-        return this;
-    }
-
-    public void setClientid(Integer clientid) {
-        this.clientid = clientid;
-    }
-
-    public Compte getCompte() {
-        return compte;
-    }
-
-    public Compte compte(Compte compte) {
-        this.compte = compte;
-        return this;
-    }
-
-    public void setCompte(Compte compte) {
-        this.compte = compte;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -135,10 +84,8 @@ public class Compte implements Serializable {
     public String toString() {
         return "Compte{" +
             "id=" + getId() +
-            ", compteid=" + getCompteid() +
             ", numcom=" + getNumcom() +
             ", solde=" + getSolde() +
-            ", clientid=" + getClientid() +
             "}";
     }
 }

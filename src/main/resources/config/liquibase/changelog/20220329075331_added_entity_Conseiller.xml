@@ -16,9 +16,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="conseillerid" type="integer">
-                <constraints nullable="false" />
-            </column>
             <column name="nom" type="varchar(50)">
                 <constraints nullable="false" />
             </column>
@@ -63,7 +60,6 @@
                   separator=";"
                   tableName="conseiller">
             <column name="id" type="numeric"/>
-            <column name="conseillerid" type="numeric"/>
             <column name="nom" type="string"/>
             <column name="prenom" type="string"/>
             <column name="tel" type="string"/>

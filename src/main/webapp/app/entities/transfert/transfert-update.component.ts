@@ -21,12 +21,10 @@ export class TransfertUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    transfertid: [null, [Validators.required]],
     date: [],
     montant: [null, [Validators.required]],
     typeoperation: [null, [Validators.required, Validators.maxLength(10)]],
     numcompte: [null, [Validators.required]],
-    conseillerid: [null, [Validators.required]],
     compteId: [],
   });
 
@@ -48,12 +46,10 @@ export class TransfertUpdateComponent implements OnInit {
   updateForm(transfert: ITransfert): void {
     this.editForm.patchValue({
       id: transfert.id,
-      transfertid: transfert.transfertid,
       date: transfert.date,
       montant: transfert.montant,
       typeoperation: transfert.typeoperation,
       numcompte: transfert.numcompte,
-      conseillerid: transfert.conseillerid,
       compteId: transfert.compteId,
     });
   }
@@ -76,12 +72,10 @@ export class TransfertUpdateComponent implements OnInit {
     return {
       ...new Transfert(),
       id: this.editForm.get(['id'])!.value,
-      transfertid: this.editForm.get(['transfertid'])!.value,
       date: this.editForm.get(['date'])!.value,
       montant: this.editForm.get(['montant'])!.value,
       typeoperation: this.editForm.get(['typeoperation'])!.value,
       numcompte: this.editForm.get(['numcompte'])!.value,
-      conseillerid: this.editForm.get(['conseillerid'])!.value,
       compteId: this.editForm.get(['compteId'])!.value,
     };
   }

@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(ConseillerService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Conseiller(0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Conseiller(0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -54,7 +54,6 @@ describe('Service Tests', () => {
       it('should update a Conseiller', () => {
         const returnedFromService = Object.assign(
           {
-            conseillerid: 1,
             nom: 'BBBBBB',
             prenom: 'BBBBBB',
             tel: 'BBBBBB',
@@ -77,7 +76,6 @@ describe('Service Tests', () => {
       it('should return a list of Conseiller', () => {
         const returnedFromService = Object.assign(
           {
-            conseillerid: 1,
             nom: 'BBBBBB',
             prenom: 'BBBBBB',
             tel: 'BBBBBB',

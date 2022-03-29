@@ -2,11 +2,6 @@
   "name": "Comptecou",
   "fields": [
     {
-      "fieldName": "comptecouid",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
       "fieldName": "fraistrans",
       "fieldType": "Integer",
       "fieldValidateRules": ["required"]
@@ -14,11 +9,6 @@
     {
       "fieldName": "soldemin",
       "fieldType": "Double",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "compteid",
-      "fieldType": "Integer",
       "fieldValidateRules": ["required"]
     }
   ],

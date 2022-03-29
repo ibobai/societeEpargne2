@@ -26,13 +26,11 @@ export class ClientUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    clientid: [null, [Validators.required]],
     nom: [null, [Validators.required, Validators.maxLength(50)]],
     prenom: [null, [Validators.required, Validators.maxLength(50)]],
     tel: [null, [Validators.required, Validators.maxLength(50)]],
     adresse: [null, [Validators.required, Validators.maxLength(250)]],
     email: [null, [Validators.required, Validators.maxLength(100)]],
-    conseillerid: [null, [Validators.required]],
     userId: [],
     compteId: [],
   });
@@ -78,13 +76,11 @@ export class ClientUpdateComponent implements OnInit {
   updateForm(client: IClient): void {
     this.editForm.patchValue({
       id: client.id,
-      clientid: client.clientid,
       nom: client.nom,
       prenom: client.prenom,
       tel: client.tel,
       adresse: client.adresse,
       email: client.email,
-      conseillerid: client.conseillerid,
       userId: client.userId,
       compteId: client.compteId,
     });
@@ -108,13 +104,11 @@ export class ClientUpdateComponent implements OnInit {
     return {
       ...new Client(),
       id: this.editForm.get(['id'])!.value,
-      clientid: this.editForm.get(['clientid'])!.value,
       nom: this.editForm.get(['nom'])!.value,
       prenom: this.editForm.get(['prenom'])!.value,
       tel: this.editForm.get(['tel'])!.value,
       adresse: this.editForm.get(['adresse'])!.value,
       email: this.editForm.get(['email'])!.value,
-      conseillerid: this.editForm.get(['conseillerid'])!.value,
       userId: this.editForm.get(['userId'])!.value,
       compteId: this.editForm.get(['compteId'])!.value,
     };
