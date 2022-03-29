@@ -1,0 +1,45 @@
+{
+  "name": "Compteepa",
+  "fields": [
+    {
+      "fieldName": "compteepaid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "tauxinteret",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "plafond",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "compteid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "compte",
+      "otherEntityRelationshipName": "compteepa",
+      "relationshipName": "compte",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220329075131",
+  "entityTableName": "compteepa",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,77 @@
+
+entity Client {
+	clientid Integer required,
+	nom String required maxlength(50),
+	prenom String required maxlength(50),
+	tel String required maxlength(50),
+	adresse String required maxlength(250),
+	email String required maxlength(100),
+	conseillerid Integer required
+}
+
+entity Comptecou {
+	comptecouid Integer required,
+	fraistrans Integer required,
+	soldemin Double required,
+	compteid Integer required
+}
+
+entity Compteepa {
+	compteepaid Integer required,
+	tauxinteret Integer required,
+	plafond Integer required,
+	compteid Integer required
+}
+
+entity Compte {
+	compteid Integer required,
+	numcom Integer required,
+	solde Double required,
+	clientid Integer required
+}
+
+entity Conseiller {
+	conseillerid Integer required,
+	nom String required maxlength(50),
+	prenom String required maxlength(50),
+	tel String required maxlength(50),
+	email String required maxlength(150),
+	nomutilisateur String required maxlength(50),
+	motdepasse String required maxlength(100)
+}
+
+entity Transfert {
+	transfertid Integer required,
+	date LocalDate,
+	montant Double required,
+	typeoperation String required maxlength(10),
+	numcompte Integer required,
+	conseillerid Integer required
+}
+
+relationship OneToOne{
+    Conseiller{user} to User
+}
+relationship OneToOne{
+    Client{user} to User
+}
+relationship ManyToOne{
+    Compteepa{compte} to Compte
+}
+relationship ManyToOne{
+    Comptecou{compte} to Compte
+}
+relationship OneToOne{
+    Client{compte} to Compte
+}
+relationship OneToOne{
+    Compte{compte} to Compte
+}
+relationship ManyToOne{
+    Transfert{compte} to Compte
+}
+
+// Options
+service * with serviceClass
+paginate * with pagination
+dto * with mapstruct

@@ -1,0 +1,87 @@
+<div>
+    <h2 id="page-heading">
+        <span>Conseillers</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-conseiller" [routerLink]="['/conseiller/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Conseiller
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="conseillers?.length === 0">
+        <span>No conseillers found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="conseillers && conseillers.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="conseillerid"><span>Conseillerid</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nom"><span>Nom</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="prenom"><span>Prenom</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="tel"><span>Tel</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="email"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="nomutilisateur"><span>Nomutilisateur</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="motdepasse"><span>Motdepasse</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let conseiller of conseillers ;trackBy: trackId">
+                    <td><a [routerLink]="['/conseiller', conseiller.id, 'view']">{{ conseiller.id }}</a></td>
+                    <td>{{ conseiller.conseillerid }}</td>
+                    <td>{{ conseiller.nom }}</td>
+                    <td>{{ conseiller.prenom }}</td>
+                    <td>{{ conseiller.tel }}</td>
+                    <td>{{ conseiller.email }}</td>
+                    <td>{{ conseiller.nomutilisateur }}</td>
+                    <td>{{ conseiller.motdepasse }}</td>
+                    <td>
+                        {{ conseiller.userId }}
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/conseiller', conseiller.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/conseiller', conseiller.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(conseiller)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="conseillers && conseillers.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+{
+  "name": "Comptecou",
+  "fields": [
+    {
+      "fieldName": "comptecouid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "fraistrans",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "soldemin",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "compteid",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "compte",
+      "otherEntityRelationshipName": "comptecou",
+      "relationshipName": "compte",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20220329075031",
+  "entityTableName": "comptecou",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

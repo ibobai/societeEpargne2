@@ -1,0 +1,98 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-comptecou-heading">Create or edit a Comptecou</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_comptecouid">Comptecouid</label>
+                    <input type="number" class="form-control" name="comptecouid" id="field_comptecouid"
+                           formControlName="comptecouid"/>
+                    <div *ngIf="editForm.get('comptecouid')!.invalid && (editForm.get('comptecouid')!.dirty || editForm.get('comptecouid')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('comptecouid')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('comptecouid')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_fraistrans">Fraistrans</label>
+                    <input type="number" class="form-control" name="fraistrans" id="field_fraistrans"
+                           formControlName="fraistrans"/>
+                    <div *ngIf="editForm.get('fraistrans')!.invalid && (editForm.get('fraistrans')!.dirty || editForm.get('fraistrans')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('fraistrans')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('fraistrans')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_soldemin">Soldemin</label>
+                    <input type="number" class="form-control" name="soldemin" id="field_soldemin"
+                           formControlName="soldemin"/>
+                    <div *ngIf="editForm.get('soldemin')!.invalid && (editForm.get('soldemin')!.dirty || editForm.get('soldemin')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('soldemin')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('soldemin')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_compteid">Compteid</label>
+                    <input type="number" class="form-control" name="compteid" id="field_compteid"
+                           formControlName="compteid"/>
+                    <div *ngIf="editForm.get('compteid')!.invalid && (editForm.get('compteid')!.dirty || editForm.get('compteid')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('compteid')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('compteid')?.errors?.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_compte">Compte</label>
+                    <select class="form-control" id="field_compte" name="compte" formControlName="compteId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="compteOption.id" *ngFor="let compteOption of comptes; trackBy: trackById">{{ compteOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

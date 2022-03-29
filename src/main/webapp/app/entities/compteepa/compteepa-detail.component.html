@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="compteepa">
+            <h2><span>Compteepa</span> {{ compteepa.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Compteepaid</span></dt>
+                <dd>
+                    <span>{{ compteepa.compteepaid }}</span>
+                </dd>
+                <dt><span>Tauxinteret</span></dt>
+                <dd>
+                    <span>{{ compteepa.tauxinteret }}</span>
+                </dd>
+                <dt><span>Plafond</span></dt>
+                <dd>
+                    <span>{{ compteepa.plafond }}</span>
+                </dd>
+                <dt><span>Compteid</span></dt>
+                <dd>
+                    <span>{{ compteepa.compteid }}</span>
+                </dd>
+                <dt><span>Compte</span></dt>
+                <dd>
+                    <div *ngIf="compteepa.compteId">
+                        <a [routerLink]="['/compte', compteepa.compteId, 'view']">{{ compteepa.compteId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/compteepa', compteepa.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
