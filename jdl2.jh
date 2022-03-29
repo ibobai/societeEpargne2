@@ -61,3 +61,4 @@ relationship ManyToOne{
 service * with serviceClass
 paginate * with pagination
 dto * with mapstruct
+
